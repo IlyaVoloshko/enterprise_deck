@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Enterprise Multi-leg Demo</title>
+  <style>
+    :root {
+      --bg: #eef2ff;
+      --card: rgba(255, 255, 255, 0.8);
+      --accent: #5b4cf0;
+      --text: #1f2430;
+      --muted: #667085;
+      --border: #e5e7f6;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 28px 0;
+      background: linear-gradient(180deg, #eef2ff, #f7f9fc);
+      font-family: Inter, Arial, sans-serif;
+    }
+
+    .slide {
+      width: 1280px;
+      height: 720px;
+      margin: 0 auto 28px;
+      border-radius: 28px;
+      overflow: hidden;
+      background: white;
+      position: relative;
+      box-shadow: 0 30px 70px rgba(32, 44, 84, 0.18);
+      padding: 54px;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -120px;
+      top: -120px;
+      width: 480px;
+      height: 480px;
+      background: radial-gradient(circle, #7d71ff 0, #5b4cf0 40%, transparent 70%);
+      opacity: 0.22;
+    }
+
+    h1 {
+      font-size: 58px;
+      margin: 0;
+      color: var(--text);
+    }
+
+    h2 {
+      font-size: 38px;
+      margin: 0 0 24px;
+      color: var(--text);
+    }
+
+    p {
+      color: var(--muted);
+      font-size: 22px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 33% 67%;
+      gap: 30px;
+      height: 560px;
+      min-height: 0;
+    }
+
+    .cards {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      min-height: 0;
+    }
+
+    .cards-compact {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      min-height: 0;
+    }
+
+    .card {
+      background: var(--card);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 18px;
+      color: var(--text);
+      line-height: 1.45;
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      color: var(--accent);
+    }
+
+    .cards-compact .card {
+      padding: 10px 12px;
+      font-size: 14px;
+      line-height: 1.25;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .cards-compact .card h3 {
+      font-size: 17px;
+      margin: 0 0 5px;
+    }
+
+    .video-wrap {
+      border-radius: 22px;
+      background: linear-gradient(135deg, #edf1ff, #dfe5ff);
+      overflow: hidden;
+      min-width: 0;
+      min-height: 0;
+      box-shadow: 0 16px 36px rgba(31, 36, 48, 0.18);
+    }
+
+    .video-wrap video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #0b1020;
+      display: block;
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 42px;
+      color: var(--muted);
+    }
+
+    .badge {
+      display: inline-block;
+      background: #ece9ff;
+      color: var(--accent);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .engine {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 450px;
+    }
+
+    .node {
+      font-size: 28px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .core {
+      background: var(--accent);
+      color: white;
+      padding: 34px 46px;
+      border-radius: 22px;
+      box-shadow: 0 12px 30px rgba(91, 76, 240, 0.35);
+      text-align: center;
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    .arrow {
+      font-size: 42px;
+      color: var(--accent);
+    }
+
+    ul {
+      font-size: 28px;
+      line-height: 1.9;
+    }
+
+    @media (max-width: 1320px) {
+      body { padding: 0; }
+      .slide {
+        transform-origin: top left;
+        margin-bottom: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="slide hero">
+    <div class="badge">Enterprise Product Demo</div>
+    <h1>Multi-leg Trip Scheduling</h1>
+    <p>Business Demonstration</p>
+    <div class="footer">The same scheduling logic applies to Multi-leg Trips and Standing Orders.</div>
+  </section>
+
+  <section class="slide">
+    <h2>Scheduling Engine</h2>
+    <div class="engine">
+      <div class="node">Multi-leg<br>Trips</div>
+      <div class="arrow">➜</div>
+      <div class="core">Scheduling<br>Engine</div>
+      <div class="arrow">➜</div>
+      <div class="node">Standing<br>Orders</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>Scenario 1 · Same Pickup Time</h2>
+    <div class="grid">
+      <div class="cards">
+        <div class="card">
+          <h3>Leg A</h3>
+          <b>Pickup</b> 07:20 AM<br>
+          <b>Appointment</b> 08:00 AM<br>
+          <b>Trip Time</b> 17 min
+        </div>
+        <div class="card">
+          <h3>Leg B</h3>
+          <b>Pickup</b> 07:20 AM<br>
+          <b>Trip Time</b> 2h 49m
+        </div>
+      </div>
+      <div class="video-wrap">
+        <video controls preload="metadata" playsinline>
+          <source src="videos/scenario-1.mp4" type="video/mp4">
+          Your browser does not support video playback.
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>Scenario 2 · Six Legs</h2>
+    <div class="grid">
+      <div class="cards cards-compact">
+        <div class="card">
+          <h3>Leg A</h3>
+          <b>Appointment</b> 08:00 AM<br>
+          <b>Pickup</b> 07:20 AM<br>
+          <b>Trip Time</b> 18 min
+        </div>
+        <div class="card">
+          <h3>Leg B</h3>
+          <b>Pickup</b> 07:20 AM<br>
+          <b>Trip Time</b> 1h 2m
+        </div>
+        <div class="card">
+          <h3>Leg C</h3>
+          <b>Pickup</b> 07:20 AM<br>
+          <b>Trip Time</b> 42 min
+        </div>
+        <div class="card">
+          <h3>Leg D</h3>
+          <b>Pickup</b> 07:20 AM<br>
+          <b>Trip Time</b> 58 min
+        </div>
+        <div class="card">
+          <h3>Leg E</h3>
+          <b>Pickup</b> 07:20 AM<br>
+          <b>Trip Time</b> 6h 42m
+        </div>
+        <div class="card">
+          <h3>Leg F</h3>
+          <b>Pickup</b> 07:20 AM<br>
+          <b>Trip Time</b> 6h 43m
+        </div>
+      </div>
+      <div class="video-wrap">
+        <video controls preload="metadata" playsinline>
+          <source src="videos/scenario-2.mp4" type="video/mp4">
+          Your browser does not support video playback.
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>Scenario 3 · Scheduled + Will Call</h2>
+    <div class="grid">
+      <div class="cards">
+        <div class="card">
+          <h3>Leg A · Scheduled</h3>
+          <b>Appointment</b> 12:00 PM<br>
+          <b>Pickup</b> 09:10 AM<br>
+          <b>Trip Time</b> 2h 16m
+        </div>
+        <div class="card">
+          <h3>Leg B · Will Call</h3>
+          <b>Pickup</b> Will Call<br>
+          <b>Trip Time</b> 54 min
+        </div>
+        <div class="card">
+          <h3>Leg C · Scheduled</h3>
+          <b>Pickup</b> 06:40 AM<br>
+          <b>Trip Time</b> 1h 1m
+        </div>
+      </div>
+      <div class="video-wrap">
+        <video controls preload="metadata" playsinline>
+          <source src="videos/scenario-3.mp4" type="video/mp4">
+          Your browser does not support video playback.
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>Scenario 4 · Multiple Will Calls</h2>
+    <div class="grid">
+      <div class="cards cards-compact">
+        <div class="card">
+          <h3>Leg A · Will Call</h3>
+          <b>Pickup</b> Will Call<br>
+          <b>Trip Time</b> 16 min
+        </div>
+        <div class="card">
+          <h3>Leg B · Scheduled</h3>
+          <b>Pickup</b> 09:00 AM<br>
+          <b>Trip Time</b> 3 min
+        </div>
+        <div class="card">
+          <h3>Leg C · Will Call</h3>
+          <b>Pickup</b> Will Call<br>
+          <b>Trip Time</b> 18 min
+        </div>
+        <div class="card">
+          <h3>Leg D · Scheduled</h3>
+          <b>Pickup</b> 05:35 AM<br>
+          <b>Trip Time</b> 50 min
+        </div>
+        <div class="card">
+          <h3>Leg E · Scheduled</h3>
+          <b>Pickup</b> 05:35 AM<br>
+          <b>Trip Time</b> 1d 2h 31m
+        </div>
+        <div class="card">
+          <h3>Leg F · Will Call</h3>
+          <b>Pickup</b> Will Call<br>
+          <b>Trip Time</b> 22h 19m
+        </div>
+      </div>
+      <div class="video-wrap">
+        <video controls preload="metadata" playsinline>
+          <source src="videos/scenario-4.mp4" type="video/mp4">
+          Your browser does not support video playback.
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>Summary</h2>
+    <ul>
+<li>Multi-leg scheduling logic supports different combinations of Scheduled and Will Call legs.</li>
+
+<li>Scheduling Engine automatically calculates Pickup Times based on Appointment Time, Travel Time, and the sequence of all trip legs.</li>
+
+<li>The same scheduling logic is consistently applied to both Trips and Standing Orders.</li>
+
+<li>All demonstrated scenarios are fully supported for Trip creation and Standing Order creation.</li>
+</ul>
+  </section>
+
+</body>
+</html>
