@@ -137,6 +137,11 @@
       margin: 0 0 5px;
     }
 
+    .cards-compact .rule-card {
+      grid-column: 1 / -1;
+      background: #f4f2ff;
+    }
+
     .video-wrap {
       border-radius: 22px;
       background: linear-gradient(135deg, #edf1ff, #dfe5ff);
@@ -386,7 +391,50 @@
   </section>
 
   <section class="slide">
-    <h2>Scenario 2 &middot; Same Pickup Time</h2>
+    <h2>Scenario 2 &middot; Sequential Pickup Time Validation</h2>
+    <div class="grid">
+      <div class="cards cards-compact">
+        <div class="card rule-card">
+          <h3>Scheduling Rule</h3>
+          Each next leg must have a pickup time equal to or later than the previous leg.
+        </div>
+        <div class="card">
+          <h3>Leg A <span class="status status-scheduled">Scheduled</span></h3>
+          <b>Appointment</b> 09:00 AM<br>
+          <b>Pickup</b> 08:05 AM<br>
+          <b>Trip Time</b> 29 min<br>
+          <b>Distance</b> 4.21 mi
+        </div>
+        <div class="card">
+          <h3>Leg B <span class="status status-scheduled">Scheduled</span></h3>
+          <b>Pickup</b> 08:35 AM<br>
+          <b>Trip Time</b> 3h 26m<br>
+          <b>Distance</b> 177.87 mi
+        </div>
+        <div class="card">
+          <h3>Leg C <span class="status status-scheduled">Scheduled</span></h3>
+          <b>Pickup</b> 09:35 AM<br>
+          <b>Trip Time</b> 3h 32m<br>
+          <b>Distance</b> 178.09 mi
+        </div>
+        <div class="card">
+          <h3>Leg D <span class="status status-scheduled">Scheduled</span></h3>
+          <b>Pickup</b> 10:05 AM<br>
+          <b>Trip Time</b> 22 min<br>
+          <b>Distance</b> 4.19 mi
+        </div>
+      </div>
+      <div class="video-wrap">
+        <video controls preload="metadata" playsinline>
+          <source src="videos/sequential-pickup-times.mp4" type="video/mp4">
+          Your browser does not support video playback.
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>Scenario 3 &middot; Same Pickup Time</h2>
     <div class="grid">
       <div class="cards">
         <div class="card">
@@ -411,7 +459,7 @@
   </section>
 
   <section class="slide">
-    <h2>Scenario 3 &middot; Six Legs</h2>
+    <h2>Scenario 4 &middot; Six Legs</h2>
     <div class="grid">
       <div class="cards cards-compact">
         <div class="card">
@@ -456,7 +504,7 @@
   </section>
 
   <section class="slide">
-    <h2>Scenario 4 &middot; Scheduled + Will Call</h2>
+    <h2>Scenario 5 &middot; Scheduled + Will Call</h2>
     <div class="grid">
       <div class="cards">
         <div class="card">
@@ -486,7 +534,7 @@
   </section>
 
   <section class="slide">
-    <h2>Scenario 5 &middot; Multiple Will Calls</h2>
+    <h2>Scenario 6 &middot; Multiple Will Calls</h2>
     <div class="grid">
       <div class="cards cards-compact">
         <div class="card">
