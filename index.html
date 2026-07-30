@@ -104,6 +104,26 @@
       color: var(--accent);
     }
 
+    .status {
+      display: inline-block;
+      margin-left: 6px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 0.72em;
+      line-height: 1.2;
+      vertical-align: 0.1em;
+    }
+
+    .status-scheduled {
+      background: #ece9ff;
+      color: #4938d1;
+    }
+
+    .status-will-call {
+      background: #fff1d6;
+      color: #9a5b00;
+    }
+
     .cards-compact .card {
       padding: 10px 12px;
       font-size: 14px;
@@ -185,6 +205,70 @@
       line-height: 1.7;
     }
 
+    .presentation-mode .slide {
+      display: none;
+      margin-bottom: 0;
+    }
+
+    .presentation-mode .slide.is-active {
+      display: flex;
+    }
+
+    .presentation-mode .footer {
+      bottom: clamp(82px, 7.03125vw, 90px);
+    }
+
+    .presentation-controls {
+      position: fixed;
+      z-index: 10;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px;
+      border: 1px solid rgba(229, 231, 246, 0.9);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 12px 30px rgba(32, 44, 84, 0.2);
+      backdrop-filter: blur(12px);
+    }
+
+    .presentation-controls button {
+      min-width: 40px;
+      height: 40px;
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--text);
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .presentation-controls button:hover {
+      background: #ece9ff;
+      color: var(--accent);
+    }
+
+    .presentation-controls button:focus-visible {
+      outline: 3px solid rgba(91, 76, 240, 0.35);
+      outline-offset: 2px;
+    }
+
+    .presentation-controls button:disabled {
+      cursor: default;
+      opacity: 0.35;
+    }
+
+    .slide-counter {
+      min-width: 58px;
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+      text-align: center;
+    }
+
     @media (max-width: 1320px) {
       body { padding: 16px 0; }
       .slide {
@@ -233,6 +317,29 @@
 
       .arrow {
         font-size: 28px;
+      }
+
+      .presentation-controls {
+        bottom: 10px;
+      }
+    }
+
+    @media print {
+      body {
+        padding: 0;
+        background: white;
+      }
+
+      .presentation-mode .slide,
+      .presentation-mode .slide.is-active {
+        display: flex;
+        width: 100%;
+        break-after: page;
+        box-shadow: none;
+      }
+
+      .presentation-controls {
+        display: none;
       }
     }
   </style>
@@ -332,18 +439,18 @@
     <div class="grid">
       <div class="cards">
         <div class="card">
-          <h3>Leg A · Scheduled</h3>
+          <h3>Leg A <span class="status status-scheduled">Scheduled</span></h3>
           <b>Appointment</b> 12:00 PM<br>
           <b>Pickup</b> 09:10 AM<br>
           <b>Trip Time</b> 2h 16m
         </div>
         <div class="card">
-          <h3>Leg B · Will Call</h3>
+          <h3>Leg B <span class="status status-will-call">Will Call</span></h3>
           <b>Pickup</b> Will Call<br>
           <b>Trip Time</b> 54 min
         </div>
         <div class="card">
-          <h3>Leg C · Scheduled</h3>
+          <h3>Leg C <span class="status status-scheduled">Scheduled</span></h3>
           <b>Pickup</b> 06:40 AM<br>
           <b>Trip Time</b> 1h 1m
         </div>
@@ -362,32 +469,32 @@
     <div class="grid">
       <div class="cards cards-compact">
         <div class="card">
-          <h3>Leg A · Will Call</h3>
+          <h3>Leg A <span class="status status-will-call">Will Call</span></h3>
           <b>Pickup</b> Will Call<br>
           <b>Trip Time</b> 16 min
         </div>
         <div class="card">
-          <h3>Leg B · Scheduled</h3>
+          <h3>Leg B <span class="status status-scheduled">Scheduled</span></h3>
           <b>Pickup</b> 09:00 AM<br>
           <b>Trip Time</b> 3 min
         </div>
         <div class="card">
-          <h3>Leg C · Will Call</h3>
+          <h3>Leg C <span class="status status-will-call">Will Call</span></h3>
           <b>Pickup</b> Will Call<br>
           <b>Trip Time</b> 18 min
         </div>
         <div class="card">
-          <h3>Leg D · Scheduled</h3>
+          <h3>Leg D <span class="status status-scheduled">Scheduled</span></h3>
           <b>Pickup</b> 05:35 AM<br>
           <b>Trip Time</b> 50 min
         </div>
         <div class="card">
-          <h3>Leg E · Scheduled</h3>
+          <h3>Leg E <span class="status status-scheduled">Scheduled</span></h3>
           <b>Pickup</b> 05:35 AM<br>
           <b>Trip Time</b> 1d 2h 31m
         </div>
         <div class="card">
-          <h3>Leg F · Will Call</h3>
+          <h3>Leg F <span class="status status-will-call">Will Call</span></h3>
           <b>Pickup</b> Will Call<br>
           <b>Trip Time</b> 22h 19m
         </div>
@@ -413,6 +520,78 @@
 <li>All demonstrated scenarios are fully supported for Trip creation and Standing Order creation.</li>
 </ul>
   </section>
+
+  <nav class="presentation-controls" aria-label="Presentation navigation">
+    <button type="button" data-action="previous" aria-label="Previous slide">←</button>
+    <span class="slide-counter" aria-live="polite">1 / 7</span>
+    <button type="button" data-action="next" aria-label="Next slide">→</button>
+    <button type="button" data-action="fullscreen" aria-label="Open fullscreen">⛶</button>
+  </nav>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll(".slide"));
+    const controls = document.querySelector(".presentation-controls");
+    const counter = controls.querySelector(".slide-counter");
+    const previousButton = controls.querySelector('[data-action="previous"]');
+    const nextButton = controls.querySelector('[data-action="next"]');
+    const fullscreenButton = controls.querySelector('[data-action="fullscreen"]');
+    let currentSlide = 0;
+
+    function showSlide(index) {
+      currentSlide = Math.max(0, Math.min(index, slides.length - 1));
+
+      slides.forEach((slide, slideIndex) => {
+        const isActive = slideIndex === currentSlide;
+        slide.classList.toggle("is-active", isActive);
+        slide.setAttribute("aria-hidden", String(!isActive));
+
+        if (!isActive) {
+          slide.querySelectorAll("video").forEach((video) => video.pause());
+        }
+      });
+
+      counter.textContent = `${currentSlide + 1} / ${slides.length}`;
+      previousButton.disabled = currentSlide === 0;
+      nextButton.disabled = currentSlide === slides.length - 1;
+      history.replaceState(null, "", `#slide-${currentSlide + 1}`);
+    }
+
+    function initialSlideIndex() {
+      const match = location.hash.match(/^#slide-(\d+)$/);
+      return match ? Number(match[1]) - 1 : 0;
+    }
+
+    previousButton.addEventListener("click", () => showSlide(currentSlide - 1));
+    nextButton.addEventListener("click", () => showSlide(currentSlide + 1));
+
+    fullscreenButton.addEventListener("click", async () => {
+      if (document.fullscreenElement) {
+        await document.exitFullscreen();
+      } else {
+        await document.documentElement.requestFullscreen();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.target.closest("video, button, input, textarea, select")) return;
+
+      if (event.key === "ArrowRight" || event.key === "PageDown" || event.key === " ") {
+        event.preventDefault();
+        showSlide(currentSlide + 1);
+      }
+
+      if (event.key === "ArrowLeft" || event.key === "PageUp") {
+        event.preventDefault();
+        showSlide(currentSlide - 1);
+      }
+
+      if (event.key === "Home") showSlide(0);
+      if (event.key === "End") showSlide(slides.length - 1);
+    });
+
+    document.body.classList.add("presentation-mode");
+    showSlide(initialSlideIndex());
+  </script>
 
 </body>
 </html>
